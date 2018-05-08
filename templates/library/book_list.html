@@ -4,7 +4,11 @@
     <h2>Books:</h2>
     <ul>
         {% for book in object_list %}
-            <li>{{ book.title }}</li>
+            <li>{{ book.title }} - 
+                <a href="{% url 'pub_book' pub=book.publisher %}">
+                    {{ book.publisher }}
+                </a>
+            </li>
         {% empty %}
             Sem livros, parsa
         {% endfor %}

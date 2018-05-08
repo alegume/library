@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <h2>Authors:</h2>
+    <ul>
+        {% for author in object_list %}
+            <li><a href="{% url 'author_detail' pk=author.pk %}">
+                    {{ author.name }}
+                </a>
+            </li>
+        {% empty %}
+            Sem livros, parsa
+        {% endfor %}
+    </ul>
+{% endblock %}

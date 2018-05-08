@@ -1,11 +1,16 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
 from django.utils import timezone
 
 from .models import Publisher, Book, Author
 
+class LibraryHome(TemplateView):
+    template_name = 'library/index.html'
+
+class AuthorList(ListView):
+    model = Author
 
 class PublisherList(ListView):
     # nao precisa por causa do queryset
@@ -44,7 +49,7 @@ class AuthorDetailView(DetailView):
     def get_object(self):
         object = super().get_object()
         object.last_accessed = timezone.now()
-        object.name = "ale 2"
+        object.name = "teste 2"
         # raise Exception(object)
         object.save()
         return object
@@ -62,7 +67,7 @@ class MyView(View):
             return HttpResponse("Poustchyy!")
 
 class Safadao(View):
-    def get(self, request, nome):
+    def get(self, request, nome): 
         vagabundo = self.hamming(nome, 'wesley')
         anjo = 100 - vagabundo
 
